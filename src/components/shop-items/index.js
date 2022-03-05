@@ -1,26 +1,48 @@
-import { Stack } from "@mui/material";
-import { useLiveQuery } from "dexie-react-hooks";
+import { Card, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { db } from "../../database/db";
+import DeleteItem from "./delete-item";
 import ShopItem from "./ShopItem";
 
 export default function ShopItems() {
+  /**@type {[ShopItem[], Function]} */
   const [items, setItems] = useState([]);
 
+  async function getFromDb() {
+    const itemsFromDb = await db.shopItems.toArray();
+
+    setItems(itemsFromDb);
+  }
+
   useEffect(() => {
-    async function getFromDb() {
-      const itemsFromDb = await db.shopItems.toArray();
-
-      console.log(itemsFromDb);
-
-      setItems(itemsFromDb);
-    }
     getFromDb();
   }, []);
+
+  /**
+   * @function deleteItem
+   * @param {number} id
+   */
+  const deleteItem = async (id) => {
+    await db.shopItems.delete(id);
+
+    getFromDb();
+  };
+
   return (
-    <Stack>
+    <Stack alignItems={"center"} gap={2}>
       {items?.map((item) => (
-        <ShopItem key={item.name} {...item} />
+        <Card variant="outlined" sx={{ width: { xs: "100%", sm: "60%" } }}>
+          <Stack
+            key={item.id + item.name}
+            direction="row"
+            gap={2.5}
+            alignItems={"center"}
+            marginX={1}
+          >
+            <ShopItem key={item.name} {...item} />
+            <DeleteItem id={item.id} deleteItem={deleteItem} />
+          </Stack>
+        </Card>
       ))}
     </Stack>
   );
