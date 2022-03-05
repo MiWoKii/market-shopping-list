@@ -1,5 +1,5 @@
 /**
- * @typedef {{name: string, value: number, unit: ('unidade'|'kg'), quantity: number}} ShopItem
+ * @typedef {{id: number, name: string, value: number, unit: ('un'|'kg'), quantity: number}} ShopItem
  */
 
 /**
