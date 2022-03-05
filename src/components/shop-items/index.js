@@ -31,14 +31,12 @@ export default function ShopItems() {
   return (
     <Stack alignItems={"center"} gap={2}>
       {items?.map((item) => (
-        <Card variant="outlined" sx={{ width: { xs: "100%", sm: "60%" } }}>
-          <Stack
-            key={item.id + item.name}
-            direction="row"
-            gap={2.5}
-            alignItems={"center"}
-            marginX={1}
-          >
+        <Card
+          variant="outlined"
+          sx={{ width: { xs: "100%", sm: "60%" } }}
+          key={item.id + item.name}
+        >
+          <Stack direction="row" gap={2.5} alignItems={"center"} marginX={1}>
             <ShopItem key={item.name} {...item} />
             <DeleteItem id={item.id} deleteItem={deleteItem} />
           </Stack>
