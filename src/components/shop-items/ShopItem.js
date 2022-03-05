@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 /**
  * @param {ShopItem} props
@@ -17,14 +17,26 @@ export default function ShopItem({ name, value, unit, quantity }) {
   };
 
   return (
-    <Box>
-      <Stack direction="row" gap={2.5}>
+    <Grid
+      container
+      direction="row"
+      sx={{ gap: { xs: 0, sm: 0.5, md: 1 } }}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+    >
+      <Grid item xs={true}>
         <Typography>{name}</Typography>
+      </Grid>
+      <Grid item>
         <Typography>
           {formatNumber(value)} / {unit}
         </Typography>
-        <Typography>{quantity}</Typography>
-      </Stack>
-    </Box>
+      </Grid>
+      <Grid container item xs={true} justifyContent={"end"}>
+        <Typography>
+          {quantity} {unit}
+        </Typography>
+      </Grid>
+    </Grid>
   );
 }
