@@ -18,7 +18,7 @@ import { db } from "../../database/db";
 const formInitialState = {
   name: "",
   value: 0,
-  unit: "unidade",
+  unit: "un",
   quantity: 0,
 };
 
@@ -146,11 +146,7 @@ export default function FormItem() {
             <FormLabel>Unidade de medida</FormLabel>
             <RadioGroup id="unity" row onChange={updateUnit} value={form.unit}>
               <FormControlLabel value="kg" control={<Radio />} label="kg" />
-              <FormControlLabel
-                value="unidade"
-                control={<Radio />}
-                label="unidade"
-              />
+              <FormControlLabel value="un" control={<Radio />} label="un" />
             </RadioGroup>
           </FormControl>
           <FormControl>
